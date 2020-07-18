@@ -168,3 +168,14 @@ COPY --from=build /usr/app/target/metadata-service.jar metadata-service.jar
 EXPOSE 8080
 ENTRYPOINT ["java","-jar","-Xms256m","-Xmx512m", "/metadata-service.jar"]
 ```
+
+#docker compose:
+
+```text
+docker-compose up
+docker-compose up -d
+docker-compose down
+docker-compose down
+docker-compose scale web=2
+docker-compose exec --index=1 app bash
+```

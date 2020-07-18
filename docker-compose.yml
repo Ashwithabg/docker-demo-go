@@ -1,0 +1,11 @@
+vsreion: '3'
+services:
+  web:
+    build:
+      volumes:
+        - data:/data
+      redis:
+        images: redis
+    volumes:
+        data:
+          external: true
