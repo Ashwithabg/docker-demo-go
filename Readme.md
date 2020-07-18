@@ -1,4 +1,4 @@
-# go-app
+# docker-demo-go
 
 run following command to start golang server
 
@@ -6,6 +6,7 @@ run following command to start golang server
 go run main.go
 ```
 open browser and hit `localhost:8080` ,you should see `hello` message
+`localhost:8080/healthcheck` ,you should see `running` message
 
 ##Docker commands
 
