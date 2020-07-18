@@ -8,7 +8,7 @@ go run main.go
 open browser and hit `localhost:8080` ,you should see `hello` message.
 `localhost:8080/healthcheck` ,you should see `running` message
 
-##Docker commands
+#Docker commands
 
 ```text
 docker ps
@@ -149,4 +149,22 @@ docker network inspect my_network
 docker network rm my_network
 docker network connect my_network nginx
 docker network disconnect my_network nginx
+```
+
+#Multi stage docker build
+1. Build stage
+2. Run stage
+
+```dockerfile
+FROM maven AS build
+WORKDIR /usr/app
+COPY pom.xml /usr/app
+RUN mvn dependency:go-offline -B
+COPY src /usr/app/src
+RUN mvn package -DskipTests
+
+FROM openjdk:alphine
+COPY --from=build /usr/app/target/metadata-service.jar metadata-service.jar
+EXPOSE 8080
+ENTRYPOINT ["java","-jar","-Xms256m","-Xmx512m", "/metadata-service.jar"]
 ```
