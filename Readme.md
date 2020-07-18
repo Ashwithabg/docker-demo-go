@@ -5,7 +5,7 @@ run following command to start golang server
 ```
 go run main.go
 ```
-open browser and hit `localhost:8080` ,you should see `hello` message
+open browser and hit `localhost:8080` ,you should see `hello` message.
 `localhost:8080/healthcheck` ,you should see `running` message
 
 ##Docker commands
@@ -90,4 +90,34 @@ EXPOSE 8080 9090
 ```dockerfile
 CMD ["executable", "param1", "param2", ...]
 ENTRYPOINT ["executable", "param1", "param2", ...]
+```
+
+#Docker mount: when container is restarted data is not lost. to avoid it we need to mount
+1.  Bind mount: any configuration can be added. We need to create the directory and then mount.
+2.  Volume mount: docker daemon is responsible in binding the volume. Example: database server
+3.  Tmpfs mount: added to memory. temporarily store some data.
+
+Two syntax
+1. mount syntax
+2. volume syntax
+
+
+mount syntax
+```text
+docker run --mount type=bind,source=/Users/ashwithabg/docker_ninja/docker-demo,destination=/root --name b1 busybox cat /root/msg.txt
+
+docker run --mount type=volume,source=any-vol,destination=/root --name bv22 busybox sh -c 'echo "hello volume" >/root/msg1.txt && cat /root/msg1.txt'
+
+docker run -v /Users/ashwithabg/docker_ninja/docker-demo:/root --name b3 busybox cat /root/msg.txt
+
+docker run -v any-vol:/root --name b5 busybox cat /root/msg1.txt
+
+docker run --mount type=bind,source=/Users/ashwithabg/docker_ninja/docker-demo-go,destination=/root --name b3 busybox sh -c 'echo "hello world" > /root/message.txt && cat /root/message.txt'
+```
+
+mount volume list, inspect and remove commands
+```text
+ docker volume ls
+ docker volume inspect any-vol
+ docker volume rm  any-vol1
 ```
