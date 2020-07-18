@@ -141,3 +141,12 @@ cd /var/lib/docker/volumes/any-vol/_data/
 Networking:
 `docker network ls`
 ![Screenshot](./images/networks.png)
+
+```text
+docker network create my_network
+docker network ls
+docker network inspect my_network
+docker network rm my_network
+docker network connect my_network nginx
+docker network disconnect my_network nginx
+```
