@@ -130,6 +130,7 @@ mount commands
  docker volume inspect any-vol
  docker volume rm  any-vol
 ```
+![Screenshot](./images/volume-inspect.png)
 
 Check the location where the volumes are stored
 ```text
