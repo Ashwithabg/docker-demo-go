@@ -102,23 +102,41 @@ Two syntax
 2. volume syntax
 
 
-mount syntax
+attach volume to container
 ```text
-docker run --mount type=bind,source=/Users/ashwithabg/docker_ninja/docker-demo,destination=/root --name b1 busybox cat /root/msg.txt
+ docker run --mount type=bind,source=/Users/ashwithabg/docker_ninja/docker-demo,destination=/root --name b1 busybox cat /root/msg.txt
 
-docker run --mount type=volume,source=any-vol,destination=/root --name bv22 busybox sh -c 'echo "hello volume" >/root/msg1.txt && cat /root/msg1.txt'
+ docker run --mount type=volume,source=any-vol,destination=/root --name bv22 busybox sh -c 'echo "hello volume" >/root/msg1.txt && cat /root/msg1.txt'
 
-docker run -v /Users/ashwithabg/docker_ninja/docker-demo:/root --name b3 busybox cat /root/msg.txt
+ docker run -v /Users/ashwithabg/docker_ninja/docker-demo:/root --name b3 busybox cat /root/msg.txt
 
-docker run -v any-vol:/root --name b5 busybox cat /root/msg1.txt
+ docker run -v any-vol:/root --name b5 busybox cat /root/msg1.txt
 
-docker run --mount type=bind,source=/Users/ashwithabg/docker_ninja/docker-demo-go,destination=/root --name b3 busybox sh -c 'echo "hello world" > /root/message.txt && cat /root/message.txt'
+ docker run --mount type=bind,source=/Users/ashwithabg/docker_ninja/docker-demo-go,destination=/root --name b3 busybox sh -c 'echo "hello world" > /root/message.txt && cat /root/message.txt'
+
+ docker run -it -v my-volume:/data --name my-container ubuntu:latest
+
 ```
 
-mount volume list, inspect and remove commands
+detach volume from container
+```text
+ docker rm -v <container_sha>
+```
+
+mount commands
 ```text
  docker volume create any-vol
  docker volume ls
  docker volume inspect any-vol
  docker volume rm  any-vol
 ```
+
+Check the location where the volumes are stored
+```text
+docker run -it --privileged --pid=host justincormack/nsenter1
+cd /var/lib/docker/volumes/any-vol/_data/
+```
+
+Networking:
+`docker network ls`
+![Screenshot](./images/networks.png)
