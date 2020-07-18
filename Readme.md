@@ -117,7 +117,8 @@ docker run --mount type=bind,source=/Users/ashwithabg/docker_ninja/docker-demo-g
 
 mount volume list, inspect and remove commands
 ```text
+ docker volume create any-vol
  docker volume ls
  docker volume inspect any-vol
- docker volume rm  any-vol1
+ docker volume rm  any-vol
 ```
